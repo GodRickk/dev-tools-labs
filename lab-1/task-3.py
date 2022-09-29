@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import cmath as m
 
+
 # при х = -а будет достигаться минимум функции так как это парабола с ветвями вверх
 def f_min(a):
     x = -a
@@ -22,6 +23,12 @@ def g_min(a, b):
         res.append(x_2)
         return res
 
+def f_x(x, a, b):
+    return ((x + a)**2) - b
+
+def g_x(x, a, b):
+    return abs(f_x(x, a, b))
+
 def solve(a, b):
     res = list()
     res.append(f_min(a))
@@ -34,3 +41,13 @@ b = float(input())
 
 res = solve(a, b)
 print (res[0], res[1])
+print("------------------------------")
+
+m = np.arange(f_min(a) - 4, f_min(a) + 4.01, 0.01)
+
+plt.plot(m, (((m + a)**2) - b))
+plt.plot(m, abs((((m + a)**2) - b)), "r--")
+plt.plot(f_min(a), f_x(f_min(a), a, b), "bo")
+plt.plot(g_min(a, b)[0], g_x(g_min(a, b)[0], a, b), "ro")
+plt.plot(g_min(a, b)[1], g_x(g_min(a, b)[1], a, b), "ro")
+plt.show()
